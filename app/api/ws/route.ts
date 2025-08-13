@@ -50,7 +50,21 @@ function publicRoomsPayload(){ return [...rooms.values()].filter(r => r.isPublic
 function getUserListForRoom(roomId: string){ const r = rooms.get(roomId); if(!r) return []; return [...r.members].map(uid => { const s = sockets.get(uid); return { uid, nickname: s?.nickname, role: r.roles.get(uid) || 'user' as Role }; }); }
 function broadcastRoom(roomId: string, msg: any){ const r = rooms.get(roomId); if(!r) return; for(const uid of r.members){ const s = sockets.get(uid); if(s && s.readyState === s.OPEN) send(s, msg); } }
 function pushFriend(a: string, b: string){ if(!friends.has(a)) friends.set(a, new Set()); friends.get(a)!.add(b); }
-function friendPayload(uid: string){ const arr = toList(friends.get(uid) || new Set()); return arr.map(fid => { const s = sockets.get(fid); return { uid: fid, nickname: s?.nickname || '(オフライン)', online: !!s, code: s?.myCode || null }; }); }
+function friendPayload(uid: string) {
+  // friends は Map<string, Set<string>> 型
+  const arr = Array.from(friends.get(uid) ?? new Set<string>());
+
+  return arr.map((fid: string) => {
+    const s = sockets.get(fid);
+    return {
+      uid: fid,
+      nickname: s?.nickname || '(オフライン)',
+      online: !!s,
+      code: s?.myCode || null
+    };
+  });
+}
+
 function genCode(len = 6){ const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; return Array.from({ length: len }, () => chars[Math.floor(Math.random() * chars.length)]).join(''); }
 function isAdmin(uid: string, roomId: string){ const r = rooms.get(roomId); if(!r) return false; return r.roles.get(uid) === 'admin'; }
 function isModOrAdmin(uid: string, roomId: string){ const r = rooms.get(roomId); if(!r) return false; const role = r.roles.get(uid); return role === 'admin' || role === 'mod'; }

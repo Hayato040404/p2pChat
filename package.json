@@ -1,22 +1,20 @@
 {
   "name": "p2pchat",
-  "private": true,
-  "type": "module",
+  "version": "1.0.0",
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 3000"
+    "start": "next start"
   },
   "dependencies": {
     "next": "14.2.4",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "nanoid": "5.0.7"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ws": "^8.16.0"     // 追加
   },
   "devDependencies": {
-  "typescript": "^5.5.0",
-  "@types/react": "^18.2.0",
-  "@types/node": "^20.5.0"
-}
-
+    "typescript": "^5.2.2",
+    "@types/react": "^18.2.14",
+    "@types/node": "^20.6.0"
+  }
 }

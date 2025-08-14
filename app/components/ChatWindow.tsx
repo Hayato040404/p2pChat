@@ -6,6 +6,7 @@ export default function ChatWindow({
   roomId, members, onSend, log, createRoom, promote, kick, mute, openDM, myId 
 }: any) {
   const [input, setInput] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const bodyRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -65,7 +66,11 @@ export default function ChatWindow({
 
   return (
     <div className="chat-wrap">
+      {sidebarOpen && <div className="sidebar-overlay open" onClick={() => setSidebarOpen(false)} />}
       <div className="chat-header">
+        <button className="menu-btn" onClick={() => setSidebarOpen(true)}>
+          ☰
+        </button>
         <div className="chat-title">
           {roomId.startsWith('DM-') ? 'ダイレクトメッセージ' : roomId}
         </div>

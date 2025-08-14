@@ -5,7 +5,9 @@ import Sidebar from './components/Sidebar';
 import ChatWindow from './components/ChatWindow';
 
 const WS_URL = typeof window !== 'undefined' ? 
-  (location.protocol === 'https:' ? `wss://${location.host}/api/ws` : `ws://${location.host}/api/ws`) : '';
+  (location.protocol === 'https:' ? 
+    `wss://${location.host}/api/ws` : 
+    `ws://localhost:3000/api/ws`) : '';
 
 export default function Page(){
   const [consentChecked, setConsentChecked] = useState(false);

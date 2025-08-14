@@ -1,7 +1,7 @@
 {
   "functions": {
-    "app/api/ws/route.ts": {
-      "runtime": "edge"
+    "pages/api/ws.ts": {
+      "runtime": "nodejs18.x"
     }
   }
 }

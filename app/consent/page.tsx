@@ -19,17 +19,36 @@ export default function ConsentPage(){
   }
 
   return (
-    <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh',background:'#f7fff8'}}>
-      <div style={{width:'92%',maxWidth:720,background:'#fff',padding:20,borderRadius:12,boxShadow:'0 6px 30px rgba(0,0,0,0.08)'}}>
-        <h1 style={{color:'#006b2f'}}>利用規約とデータ保存について</h1>
+    <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh',background:'#f8f9fa'}}>
+      <div style={{width:'92%',maxWidth:720,background:'#fff',padding:32,borderRadius:16,boxShadow:'0 8px 40px rgba(0,0,0,0.12)'}}>
+        <div style={{textAlign:'center',marginBottom:24}}>
+          <div style={{fontSize:48,marginBottom:16}}>💬</div>
+          <h1 style={{color:'#06c755',fontSize:28,fontWeight:700,margin:0}}>p2pChat</h1>
+        </div>
+        <h2 style={{color:'#1d1d1f',fontSize:20,marginBottom:16}}>利用規約とデータ保存について</h2>
         <p>ようこそ。以下を必ずお読みください：</p>
-        <ul>
+        <ul style={{lineHeight:1.6,marginBottom:24}}>
           <li>メッセージ履歴はサーバーに <strong>最大3日間</strong> 保存されます。</li>
           <li>本サーバーのデータは <strong>インメモリ保存</strong> です。サーバー再起動・スケール等により、すべてのデータ（履歴・公開ルーム・フレンド関係など）が消える可能性があります。</li>
           <li>匿名で利用できますが、ブラウザに保存された「マイコード」や UUID は端末に残ります。</li>
         </ul>
-        <div style={{marginTop:18,display:'flex',gap:8}}>
-          <button onClick={()=>accept()} style={{background:'#00b050',color:'#fff',padding:'10px 14px',borderRadius:10,border:'none'}}>同意して開始</button>
+        <div style={{marginTop:32,textAlign:'center'}}>
+          <button 
+            onClick={()=>accept()} 
+            style={{
+              background:'#06c755',
+              color:'#fff',
+              padding:'14px 32px',
+              borderRadius:24,
+              border:'none',
+              fontSize:16,
+              fontWeight:600,
+              cursor:'pointer',
+              boxShadow:'0 4px 16px rgba(6,199,85,0.3)'
+            }}
+          >
+            同意して開始
+          </button>
         </div>
       </div>
     </div>

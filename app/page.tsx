@@ -4,7 +4,8 @@ import { nanoid } from 'nanoid';
 import Sidebar from './components/Sidebar';
 import ChatWindow from './components/ChatWindow';
 
-const WS_URL = typeof window !== 'undefined' ? (location.protocol === 'https:' ? `wss://${location.host}/api/ws` : `ws://${location.host}/api/ws`) : '';
+const WS_URL = typeof window !== 'undefined' ? 
+  (location.protocol === 'https:' ? `wss://${location.host}/api/ws` : `ws://${location.host}/api/ws`) : '';
 
 export default function Page(){
   const [consentChecked, setConsentChecked] = useState(false);
@@ -21,6 +22,7 @@ export default function Page(){
   const [log, setLog] = useState<string[]>([]);
   const [friends, setFriends] = useState<any[]>([]);
   const [pending, setPending] = useState<string[]>([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(()=>{
     const c = localStorage.getItem('p2pchat_consent');
@@ -153,7 +155,7 @@ export default function Page(){
 
   return (
     <div className="app-shell">
-      <aside className="sidebar">
+      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <Sidebar
           nickname={nickname}
           setNickname={setNickname}
@@ -172,20 +174,18 @@ export default function Page(){
         />
       </aside>
       <main>
-        <div className="chat-wrap">
-          <ChatWindow
-            roomId={active}
-            members={members}
-            onSend={(t:string)=>sendP2P(t)}
-            log={log}
-            createRoom={createRoom}
-            promote={promote}
-            kick={kick}
-            mute={mute}
-            openDM={openDM}
-            myId={myId}
-          />
-        </div>
+        <ChatWindow
+          roomId={active}
+          members={members}
+          onSend={(t:string)=>sendP2P(t)}
+          log={log}
+          createRoom={createRoom}
+          promote={promote}
+          kick={kick}
+          mute={mute}
+          openDM={openDM}
+          myId={myId}
+        />
       </main>
     </div>
   );

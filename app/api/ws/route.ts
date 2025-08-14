@@ -1,5 +1,15 @@
 export const runtime = 'edge';
 
+// Vercel Edge Runtime WebSocket support
+declare global {
+  var WebSocketPair: {
+    new (): {
+      0: WebSocket;
+      1: WebSocket;
+    };
+  };
+}
+
 // ----- 型 -----
 type Role = 'admin'|'mod'|'user';
 type Sock = WebSocket & {
